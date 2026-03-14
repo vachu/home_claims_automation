@@ -3,8 +3,8 @@ namespace HomeClaims.Core;
 using HomeClaims.Interfaces;
 using HomeClaims.Core.Model;
 
-public class PolicyAdminClient: IPolicyClient {
-    public PolicyAdminClient(string url)
+public class DummyPolicyAdminClient: IPolicyClient {
+    public DummyPolicyAdminClient(string url)
     {
         // url is supposed to be the API endpoint of the (external) Policy Admin system
         // It's deliberately unused in the implementation.

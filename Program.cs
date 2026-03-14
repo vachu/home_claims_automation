@@ -10,10 +10,11 @@ public class Program
 
         // Get the port from the appsettings config file (default to 5000 if not provided)
         var port = builder.Configuration["ServiceConfig:Port"] ?? "5000";
+        var policyAdminUrl = builder.Configuration["ServiceConfig:PolicAdminSystem"] ?? "";
         builder.WebHost.UseUrls($"http://localhost:{port}");
         
         var app = builder.Build();
-        app.InitEndpoints();
+        app.InitEndpoints(policyAdminUrl);
         app.Run();
     }
 }

@@ -1,10 +1,16 @@
 namespace HomeClaims.Endpoints;
 
+using HomeClaims.Core;
 using HomeClaims.Core.Model;
+using HomeClaims.Interfaces;
 
 public static class AppEndpoints {
-    public static void InitEndpoints(this IEndpointRouteBuilder app)
+    private static string policyAdminUrl = "";
+    
+    public static void InitEndpoints(this IEndpointRouteBuilder app, string url)
     {
+        policyAdminUrl = url;        
+        
         // A simple GET endpoint returning a plain text
         app.MapGet("/", () => "Home Claims Automation Service!");
 
@@ -17,11 +23,15 @@ public static class AppEndpoints {
             Status = "Online" 
         });
         
+        // The MAIN Endpoint for this exercise
         app.MapPost("/claim-settlement", SettleClaim);
     }
     
     private static async Task<IResult> SettleClaim(ClaimRequest req, CancellationToken ct)
     {
+        IPolicyClient cli = new DummyPolicyAdminClient(policyAdminUrl);
+        IClaimSettlement settlement = new ClaimProcessor(cli);
+        
         return await Task.FromResult(Results.Created($"Claim received - {req}", req));
         //return await Task.FromResult(Results.BadRequest($"Cannot process Claim - {req}"));
     }

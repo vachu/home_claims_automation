@@ -4,9 +4,16 @@ using HomeClaims.Interfaces;
 using HomeClaims.Core.Model;
 
 public class ClaimProcessor : IClaimSettlement {
-    public async Task<SettlementDecision> ProcessClaimAsync(ClaimRequest req, CancellationToken ct)
+    private IPolicyClient policyAdminClient;
+    
+    public ClaimProcessor(IPolicyClient policyAdminClient)
     {
-        IPolicyClient pc = new PolicyAdminClient("");
+        this.policyAdminClient = policyAdminClient;
+    }
+    
+    public async Task<SettlementDecision> EvaluateClaimAsync(ClaimRequest request,
+        CancellationToken cancellationToken)
+    {
         return await Task.FromResult(new SettlementDecision("", false, "invalid claim"));
     }
 }
