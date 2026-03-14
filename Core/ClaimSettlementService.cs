@@ -33,21 +33,24 @@ public class ClaimSettlementService : IClaimSettlementService {
         }
         
         PolicyDetails det = await policyDetailsTask; // fetch Policy Details
-        var statusReason = det.IsActive ? "" : "Policy is inactive";
 
-        bool isWithinSmartSettleThreshold = det.IsActive;
-        if (isWithinSmartSettleThreshold) {
-            isWithinSmartSettleThreshold =
-                request.PropertyAgeYears <= 30 && request.ClaimAmount < 3000m;
-            if (!isWithinSmartSettleThreshold) {
+        var isWithinSmartSettleThreshold = false;
+        var statusReason = det.IsActive ? "" : "Policy is inactive";
+        if (det.IsActive) {
+            if (request.ClaimAmount > 0 && request.ClaimAmount <= det.CoverageLimit) {
                 isWithinSmartSettleThreshold =
-                    request.PropertyAgeYears > 30 && request.ClaimAmount < 1000m;
+                    request.PropertyAgeYears <= 30 && request.ClaimAmount < 3000m;
+                if (!isWithinSmartSettleThreshold) {
+                    isWithinSmartSettleThreshold =
+                        request.PropertyAgeYears > 30 && request.ClaimAmount < 1000m;
+                }
+                
+                if (!isWithinSmartSettleThreshold)
+                    statusReason = "Smart Settle Threshold breached";
+            } else {
+                statusReason = "Claim amount exceeds coverage limit";
             }
-            
-            if (!isWithinSmartSettleThreshold)
-                statusReason = "Smart Settle Threshold breached";
         }
-        
         return await Task.FromResult(new SettlementDecision(
                                             request.PolicyNumber,
                                             isWithinSmartSettleThreshold,
