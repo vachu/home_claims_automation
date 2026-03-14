@@ -30,7 +30,7 @@ public static class AppEndpoints {
     private static async Task<IResult> SettleClaim(ClaimRequest req, CancellationToken ct)
     {
         IPolicyClient cli = new DummyPolicyAdminClient(policyAdminUrl);
-        IClaimSettlement settlement = new ClaimProcessor(cli);
+        IClaimSettlementService settlement = new ClaimSettlementService(cli);
         
         return await Task.FromResult(Results.Created($"Claim received - {req}", req));
         //return await Task.FromResult(Results.BadRequest($"Cannot process Claim - {req}"));

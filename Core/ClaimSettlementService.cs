@@ -3,10 +3,10 @@ namespace HomeClaims.Core;
 using HomeClaims.Interfaces;
 using HomeClaims.Core.Model;
 
-public class ClaimProcessor : IClaimSettlement {
+public class ClaimSettlementService : IClaimSettlementService {
     private IPolicyClient policyAdminClient;
     
-    public ClaimProcessor(IPolicyClient policyAdminClient)
+    public ClaimSettlementService(IPolicyClient policyAdminClient)
     {
         this.policyAdminClient = policyAdminClient;
     }
