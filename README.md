@@ -1,6 +1,5 @@
 # Home Claims Automation
 
-
 NOTE: This entire exercise was developed with severe technical handicaps:
 1. Linux Mint 22.3 on a 9+ year old hardware
 2. Visual Studio Code slows down to a crawl.  Hence no intellisense or Github Copilot help for most part of the development.  Had to do with 'xed' text editor
@@ -10,10 +9,15 @@ Yet, managed to create a decent README.md with all the important explanations, w
 
 Still, the Test Cases couldn't be completed as I had challenges in fixing package dependencies - .Net 10 seems to have an issue with Xunit.
 
-Earnestly hoping that *_sympathetic consideration_* would be given, for the time taken.  Last but not the least, had to spend some time in setting up the .Net dev infra on my old Linux Mint PC.
-
 ## Overview
 This project is a .NET 10 web service for automating home insurance claims. It is designed for extensibility, testability, and integration with external policy administration systems. The service exposes REST endpoints for claim settlement, status, and health checks.
+
+## My Approach
+1. For this exercise, I decided to stick to the original problem statement / exercise as that document was quite clear about what's expected
+2. I decided to use "Minimal API" way instead of any other "heavy-weight" alternatives like EF-Core.  Given the time constraints, I chose simplicity
+3. I segregated to code base into `Core/`, `Core/Model/`, `Endpoints/` and `Interfaces/`.  As an afterthought, I feel it's better to place the `Model/` folder directly under this project's root folder
+4. I have used ctor-based Dependency Injection wherever appropriate
+5. Didn't take the trouble of implementing the "external" Payment Admin System but just implemented a "dummy" implementation which could be easily replaced by a more production-ready one
 
 ## Architecture
 
