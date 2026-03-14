@@ -1,11 +1,12 @@
 # Home Claims Automation
 
+
 NOTE: This entire exercise was developed with severe technical handicaps:
 1. Linux Mint 22.3 on a 9+ year old hardware
-2. Visual Studio Code slows down to a crawl.  Hence no intellisense or Github Copilot help for most part of the development.  Had to do with 'xed' text editory
+2. Visual Studio Code slows down to a crawl.  Hence no intellisense or Github Copilot help for most part of the development.  Had to do with 'xed' text editor
 3. Windows laptop available only in the last stages
 
-Yet, managed to create a decent README.md with all the important explanations, with the help of Copilot (on VS Code windows).  
+Yet, managed to create a decent README.md with all the important explanations, with the help of Copilot (on VS Code windows).
 
 Still, the Test Cases couldn't be completed as I had challenges in fixing package dependencies - .Net 10 seems to have an issue with Xunit.
 
@@ -38,6 +39,15 @@ This project is a .NET 10 web service for automating home insurance claims. It i
 
 - **Dependency Injection:**
 	- Services are injected via constructors for testability and flexibility.
+- **Business Logic:**
+	- Claim settlement checks policy status, coverage limit, property age, and claim amount against smart thresholds.
+- **Async Operations:**
+	- Claim evaluation and policy lookup are performed asynchronously.
+- **Cancellation Tokens:**
+	- Long-running operations support cancellation for graceful shutdown.
+- **Error Handling:**
+	- If the policy admin system is inaccessible, the service returns a structured error in the settlement decision.
+	- If claim amount exceeds coverage, or smart threshold is breached, appropriate status reasons are returned.
 - **Async Operations:**
 	- Claim evaluation and policy lookup are performed asynchronously.
 - **Cancellation Tokens:**
@@ -78,6 +88,7 @@ dotnet run
 - Implement custom `IPolicyClient` for real policy admin integration.
 - Add new endpoints in `Endpoints/Init.cs`.
 - Extend domain models in `Core/Model.cs`.
+- Add more unit tests in `Tests/ClaimSettlementServiceTests.cs` for edge cases and repository integration.
 
 ## License
 
