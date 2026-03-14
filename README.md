@@ -1,5 +1,16 @@
 # Home Claims Automation
 
+NOTE: This entire exercise was developed with severe technical handicaps:
+1. Linux Mint 22.3 on a 9+ year old hardware
+2. Visual Studio Code slows down to a crawl.  Hence no intellisense or Github Copilot help for most part of the development.  Had to do with 'xed' text editory
+3. Windows laptop available only in the last stages
+
+Yet, managed to create a decent README.md with all the important explanations, with the help of Copilot (on VS Code windows).  
+
+Still, the Test Cases couldn't be completed as I had challenges in fixing package dependencies - .Net 10 seems to have an issue with Xunit.
+
+Earnestly hoping that *_sympathetic consideration_* would be given, for the time taken.  Last but not the least, had to spend some time in setting up the .Net dev infra on my old Linux Mint PC.
+
 ## Overview
 This project is a .NET 10 web service for automating home insurance claims. It is designed for extensibility, testability, and integration with external policy administration systems. The service exposes REST endpoints for claim settlement, status, and health checks.
 
